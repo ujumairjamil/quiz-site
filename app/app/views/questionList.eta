@@ -1,0 +1,30 @@
+<% layout("./layouts/layout.eta") %>
+<h1><%= it.topic.name %></h1>
+<% if (it.user) { %>
+  <h3>Create a new question</h3>
+  <form method="POST" action="/topics/<%= it.topic.id %>/questions">
+    <%~ includeFile('./partials/error.eta', { errors: it.errors, attribute: 'question_text'}) %>
+    <div class="mb-3">
+      <label for="input-question-text" class="form-label">Question text</label>
+      <textarea
+        placeholder="Question text"
+        class="form-control"
+        id="input-question-text"
+        name="question_text"
+        value="<%= it.question_text || '' %>"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Create</button>
+  </form>
+<% } %>
+
+<% if (it.questions.length) { %>
+  <hr>
+  <h2>Questions</h2>
+  <% it.questions.forEach((question) => { %>
+    <div>
+      <a href="/topics/<%= it.topic.id %>/questions/<%= question.id %>">
+        <%= question.question_text %>
+      </a>
+    </div>
+  <% }); %>
+<% } %>

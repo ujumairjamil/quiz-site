@@ -1,0 +1,34 @@
+<% layout("./layouts/layout.eta") %>
+<h1 <%= it.question.question_text %>>Question</h1>
+<h2>Answer</h2>
+  <p>Create answer options</p>
+  <form method="POST" action="/topics/<%= it.question.topic_id %>/questions/<%= it.question.question_id %>/options">
+    <%~ includeFile('./partials/error.eta', { errors: it.errors, attribute: 'question_text'}) %>
+     <%~ includeFile('./partials/error.eta', { errors: it.errors, attribute: 'is_correct'}) %>
+    <div class="mb-3">
+      <input type="textarea" placeholder="answer-option" class="form-control" id="input-name" name="option_text" value="<%= it.name || '' %>">
+    </div>
+    <div class="form-check">
+  <input class="form-check-input" type="checkbox" value="<%= it.option_text || '' %>" id="flexCheckDefault" name="is_correct">
+  <label class="form-check-label" for="flexCheckDefault">
+    Default checkbox
+  </label>
+</div>
+    <button type="submit" class="btn btn-primary">Create</button>
+  </form>
+  <hr>
+<% } %>
+
+<% it.topics.forEach((topic) => { %>
+  <div>
+    <a href="/topics/<%= topic.id %>">
+      <%= topic.name %>
+    </a>
+
+   
+      <form method="POST" action="/quiz/<%= topic.id %>/questions/<%= question.id %>/options/<%= option.id %>" class="d-inline ms-1">
+        <button type="submit" class="btn btn-danger">Choose</button>
+      </form>
+   
+  </div>
+<% }); %>

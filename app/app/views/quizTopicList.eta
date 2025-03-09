@@ -1,0 +1,12 @@
+<% layout("./layouts/layout.eta") %>
+<h1>Choose a topic</h1>
+<% if (it.error) { %>
+  <p class="text-danger"><%= it.error %></p>
+<% } %>
+<% it.topics.forEach((topic) => { %>
+  <div>
+    <a href="/quiz/<%= topic.id %>">
+      <%= topic.name %>
+    </a>
+  </div>
+<% }); %>

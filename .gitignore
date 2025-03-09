@@ -1,3 +1,5 @@
 app-cache/deps/**
 app-cache/gen/**
 .vscode/**
+
+postgresql://quiz_site_user:tC0YC7cMl9Co0sb4iDX8tN68u4Mnz5kB@dpg-cv6vd02n91rc73bj134g-a/quiz_site
