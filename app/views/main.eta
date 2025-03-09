@@ -1,0 +1,33 @@
+<% layout("./layouts/layout.eta") %>
+<h1>Quiz site</h1>
+<h3>Welcome!</h3>
+<h3>This is a quiz site for repeated practice of learned content, 
+    where you can create and take any quizes of your choosing. 
+    Please register a user account to use the site.</h3>
+<h5>Here are some statistics from the quizes:</h5>
+
+<table class="table table-striped">
+  <thead>
+   <tr>
+    <th>Topics</th>
+    <th>Questions</th>
+    <th>Question answers</th>
+   </tr>
+    
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= it.topicCount %></td>
+      <td><%= it.questionCount %></td>
+      <td><%= it.answerCount %></td>
+    </tr>
+  </tbody>
+</table>
+
+<% if (it.user) { %>
+  <a href="/auth/logout" class="btn btn-primary">Logout</a>
+<% } else { %>
+  <p>Please login or register.</p>
+  <a href="/auth/login" class="btn btn-primary">Login</a>
+  <a href="/auth/register" class="btn btn-primary">Register</a>
+<% } %>

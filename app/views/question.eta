@@ -1,0 +1,53 @@
+<% layout("./layouts/layout.eta") %>
+<h1><%= it.question.question_text %></h1>
+<h3>Create answer options</h3>
+<form method="POST" action="/topics/<%= it.question.topic_id %>/questions/<%= it.question.id %>/options">
+  <%~ includeFile('./partials/error.eta', { errors: it.errors, attribute: 'option_text'}) %>
+  <div class="mb-3">
+    <label for="input-option-text" class="form-label">Option text</label>
+    <textarea
+      placeholder="Option text"
+      class="form-control"
+      id="input-option-text"
+      name="option_text"
+      value="<%= it.option_text || '' %>"></textarea>
+  </div>
+  <%~ includeFile('./partials/error.eta', { errors: it.errors, attribute: 'is_correct'}) %>
+  <div class="form-check">
+    <input class="form-check-input" type="checkbox" value="<%= it.option_text || '' %>" id="input-is-correct" name="is_correct">
+    <label class="form-check-label" for="input-is-correct">
+      Is the answer option correct?
+    </label>
+  </div>
+  <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+<% if (it.options.length) { %>
+  <hr>
+  <h2>Answer options</h2>
+  <% it.options.forEach((option) => { %>
+    <div>
+      <span>
+        <%= option.option_text %>
+        (
+        <% if (option.is_correct) { %>
+          <span class="text-success">right</span>
+        <% } else { %>
+          <span class="text-danger">wrong</span>
+        <% } %>
+        )
+      </span>
+
+      <form
+        method="POST"
+        action="/topics/<%= it.topicId %>/questions/<%= it.question.id %>/options/<%= option.id %>/delete"
+        class="d-inline ms-1">
+        <button type="submit" class="btn btn-danger">Delete option</button>
+      </form>
+    </div>
+  <% }); %>
+<% } else { %>
+  <form method="POST" action="/topics/<%= it.topicId %>/questions/<%= it.question.id %>/delete" class="d-inline ms-1">
+    <button type="submit" class="btn btn-danger">Delete question</button>
+  </form>
+<% } %>
