@@ -20,3 +20,4 @@ https://quiz-site-e54l.onrender.com
 
 Note that this uses Render's free tier, so the database will only be usable for 90 days. If there are any errors, this is probably the cause. If this happens, a new database needs to be added to Render using [these instructions](https://fitech101.aalto.fi/web-software-development/15-deployment-iii/1-deployment-and-databases-using-render/). Also note that only 1 database at a time can be enabled on the Render's free tier.
 # quiz-site
+# quiz-site-app
